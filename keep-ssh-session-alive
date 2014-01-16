@@ -1,0 +1,12 @@
+Keep your ssh session alive
+
+1. Check if there is a config file in .ssh directory under your home directory.
+
+2. If yes, then perform step 3.
+
+3. Add the following two lines to the ~/.ssh/config file and indent the second line with a space.
+
+Host *
+ ServerAliveInterval 60
+
+3. If there is no such file then create it and perform step 3.
