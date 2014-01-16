@@ -1,0 +1,2 @@
+# single line of code to print oldest and latest modified file in a directory
+ls -lrt | awk -v var1=$((`ls -l | wc -l`)) '{if (NR==2 || NR==var1) print}'
