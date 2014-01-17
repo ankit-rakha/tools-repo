@@ -1,0 +1,20 @@
+R boxplots for financial analysis
+
+# Download historical stock prices for different companies in csv format from:
+
+<a href="http://finance.yahoo.com/q/hp?s=YHOO" target="_blank">http://finance.yahoo.com/q/hp?s=YHOO</a>
+
+# Generate boxplots for comparison
+
+[sourcecode language="R"]
+filenames <- list.files(pattern=".*csv")
+ names <- substr(filenames,1,nchar(filenames)-4)
+ for(i in names){
+ assign(i,read.csv(paste(i,".csv",sep=""),header=TRUE))
+
+}
+
+boxplot(list(AAPL$Adj.Close,GOOG$Adj.Close,MSFT$Adj.Close,AMZN$Adj.Close),notch=TRUE,col=c("aquamarine","red","bisque","lightblue"),names=c("AAPL","GOOG","MSFT","AMZN"),main="Comparison of Adjusted Closing Prices for some Tech Companies",xlab="Tech Companies",ylab="Stock Prices")
+[/sourcecode]
+
+
