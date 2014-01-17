@@ -1,0 +1,47 @@
+
+# All the test runs were performed on a 48 core AMD Opteron(tm) Processor 6172 node
+
+# size of the file
+
+# du -sh chr1.wigFix
+# 3.3G chr1.wigFix
+
+# PERL script
+# time ./cal_time.pl chr1.wigFix
+
+# 222439085
+# real 0m14.440s
+# user 0m11.717s
+# sys 0m2.715s
+
+# Perl script used to count number of lines
+
+#!/usr/bin/perl
+
+use strict; use warnings; use diagnostics;
+
+my ($lines,$buffer);
+
+open my $fh, "<", "$ARGV[0]" or die "Can't open file name: $ARGV[0]\n";
+
+while (sysread $fh, $buffer, 4096) {
+ $lines += ($buffer =~ tr/\n//);
+}
+
+print "$lines.\n";
+
+# awk command
+time awk 'END{print NR}' chr1.wigFix
+
+# 222439085
+# real 0m23.298s
+# user 0m20.478s
+# sys 0m2.779s
+
+# wc -l command
+time wc -l < chr1.wigFix
+
+# 222439085
+# real 0m37.512s
+# user 0m7.201s
+# sys 0m6.680s
