@@ -8,138 +8,123 @@ using namespace std;
 
 // Create a sorted vector
 
-void createVector( vector<int> &vect1, const int size ){
+void createVector(vector<int> &vect1, const int size)
+{
+	for(int counter = 0; counter < size; ++counter)
+	{
+		vect1.push_back(arc4random() % 100 + 1);
+	}
 
-for ( int counter = 0; counter < size; ++counter ){
-
-vect1.push_back( arc4random() % 100 + 1 );
-
-}
-
-sort( vect1.begin(), vect1.end() );
-
+	sort(vect1.begin(), vect1.end());
 }
 
 // Display index
 
-void displayIndex( vector<int> const &vect1 ){
+void displayIndex(vector<int> const &vect1)
+{
+	for(int counter = 0; counter < vect1.size(); ++counter)
+	{
+		cout << setw (10) << counter;
+	}
 
-for ( int counter = 0; counter < vect1.size(); ++counter ){
-
-cout << setw (10) << counter;
-
-}
-
-cout << endl;
-
+	cout << endl;
 }
 
 // Display vector
 
-void displayVector( vector<int> const &vect1 ){
+void displayVector(vector<int> const &vect1)
+{
+	for(int counter = 0; counter < vect1.size(); ++counter )
+	{
+		cout << setw (10) << vect1[ counter ];
+	}
 
-for ( int counter = 0; counter < vect1.size(); ++counter ){
+	cout << endl;
 
-cout << setw (10) << vect1[ counter ];
+	displayIndex( vect1 );
 
-}
-
-cout << endl;
-
-displayIndex( vect1 );
-
-cout << endl;
-
+	cout << endl;
 }
 
 // Binary search - doesn't take care of duplicate entries
 
-long binarySearch( vector<int> const &vect1, const int key ){
+long binarySearch(vector<int> const &vect1, const int key)
+{
+	long first_element = 0;
 
-long first_element = 0;
+	long last_element = vect1.size() - 1;
 
-long last_element = vect1.size() - 1;
+	int counter1 = 0;
 
-int counter1 = 0;
+	while(first_element <= last_element)
+	{
+		++counter1;
 
-while( first_element <= last_element ){
+		long mid_element = ( first_element + last_element ) / 2;
 
-++counter1;
+		cout << "Round " << counter1 << endl << endl;
 
-long mid_element = ( first_element + last_element ) / 2;
+		cout << "First element: " << vect1[ first_element ] << " at position: " << first_element << endl;
 
-cout << "Round " << counter1 << endl << endl;
+		cout << "Mid element: " << vect1[ mid_element ] << " at position: " << mid_element << endl;
 
-cout << "First element: " << vect1[ first_element ] << " at position: " << first_element << endl;
+		cout << "Last element: " << vect1[ last_element ] << " at position: " << last_element << endl;
 
-cout << "Mid element: " << vect1[ mid_element ] << " at position: " << mid_element << endl;
+		cout << "Key is: " << key << endl << endl;
 
-cout << "Last element: " << vect1[ last_element ] << " at position: " << last_element << endl;
+		if (key > vect1[mid_element])
+		{
+			first_element = mid_element + 1;
+		}
 
-cout << "Key is: " << key << endl << endl;
+		else if(key < vect1[mid_element])
+		{
+			last_element = mid_element - 1;
+		}
 
-if ( key > vect1[ mid_element ] ){
+		else if(key == vect1[mid_element])
+		{
+			return mid_element;
+		}
+	}
 
-first_element = mid_element + 1;
-
+	return -1;
 }
 
-else if( key < vect1[ mid_element ] ){
+int main(int argc, char * argv[], char **envp, char **apple)
+{
+	vector<int> vect1;
 
-last_element = mid_element - 1;
+	const int size = 10;
 
-}
+	int key = 0;
 
-else if( key == vect1[ mid_element ] ){
+	// Create a vector of random integers
 
-return mid_element;
+	createVector(vect1, size);
 
-}
+	// Display vector
 
-}
+	displayVector(vect1);
 
-return -1;
+	cout << endl << "Enter a number to search: ";
 
-}
+	cin >> key;
 
-int main( int argc, char * argv[], char **envp, char **apple ){
+	// Search an element in vector
 
-vector<int> vect1;
+	long retval;
 
-const int size = 10;
+	retval = binarySearch(vect1, key);
 
-int key = 0;
+	if (retval >= 0)
+	{
+		cout << key << " found at position: " << retval << endl;
+	}
+	else
+	{
+		cout << key << " not found" << endl;
+	}
 
-// Create a vector of random integers
-
-createVector( vect1, size );
-
-// Display vector
-
-displayVector( vect1 );
-
-cout << endl << "Enter a number to search: ";
-
-cin >> key;
-
-// Search an element in vector
-
-long retval;
-
-retval = binarySearch( vect1, key );
-
-if ( retval >= 0 ){
-
-cout << key << " found at position: " << retval << endl;
-
-}
-
-else{
-
-cout << key << " not found" << endl;
-
-}
-
-return 0;
-
+	return 0;
 }
