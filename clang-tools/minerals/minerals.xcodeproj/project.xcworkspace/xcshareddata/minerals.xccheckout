@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>53FB56EB-488D-4957-ADC6-828936381F17</string>
+	<key>IDESourceControlProjectName</key>
+	<string>minerals</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4639C3C3-B12F-4457-A0EC-9CA8E1B89905</key>
+		<string>ssh://github.com/ankit-rakha/tools-repo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>clang-tools/minerals/minerals.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4639C3C3-B12F-4457-A0EC-9CA8E1B89905</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/ankit-rakha/tools-repo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4639C3C3-B12F-4457-A0EC-9CA8E1B89905</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4639C3C3-B12F-4457-A0EC-9CA8E1B89905</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tools-repo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
