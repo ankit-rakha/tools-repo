@@ -1,0 +1,11 @@
+verticadb=> SELECT current_fault_tolerance FROM system;
+ current_fault_tolerance
+-------------------------
+                       1
+(1 row)
+
+verticadb=> SELECT VERSION();
+              VERSION
+------------------------------------
+ Vertica Analytic Database v6.1.0-0
+(1 row)
