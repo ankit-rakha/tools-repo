@@ -35,3 +35,8 @@
 ==> 5) /opt/vertica/bin/vsql -A -c “select * from dc_transaction_ends;” > /tmp/dce.txt
 
 //++++++++++++++++++++++++++++++++++++++++
+
+==> 6) CREATE FLEX TABLE dce();
+COPY dce FROM ‘/tmp/dce.txt’ PARSER FDelimitedParser();
+
+//++++++++++++++++++++++++++++++++++++++++
