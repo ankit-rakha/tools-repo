@@ -9,3 +9,9 @@ verticadb=> SELECT VERSION();
 ------------------------------------
  Vertica Analytic Database v6.1.0-0
 (1 row)
+
+verticadb=> SELECT * FROM v_monitor.data_collector LIMIT 1;
+      node_name       |        component         |          table_name           |                                        description                                         | access_restricted | in_db_log | in_vertica_log | memory_buffer_size_kb | disk_size_kb | record_too_big_errors | lost_buffers | lost_records | retired_files | retired_records | current_memory_records | current_disk_records | current_memory_bytes | current_disk_bytes |          first_time           |           last_time           |    kb_per_day
+----------------------+--------------------------+-------------------------------+--------------------------------------------------------------------------------------------+-------------------+-----------+----------------+-----------------------+--------------+-----------------------+--------------+--------------+---------------+-----------------+------------------------+----------------------+----------------------+--------------------+-------------------------------+-------------------------------+------------------
+ v_verticadb_node0002 | AllocationPoolStatistics | dc_allocation_pool_statistics | Information about global memory pools, which generally cannot be recovered without restart | t                 | f         | f              |                    64 |          256 |                     0 |            0 |            0 |         15130 |         6596864 |                      0 |                 1476 |                    0 |             221400 | 2014-02-03 15:59:51.003211-05 | 2014-02-03 16:12:08.003092-05 | 25343.1842087702
+(1 row)
