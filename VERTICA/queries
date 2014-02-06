@@ -40,3 +40,12 @@
 COPY dce FROM ‘/tmp/dce.txt’ PARSER FDelimitedParser();
 
 //++++++++++++++++++++++++++++++++++++++++
+
+==> 7) verticadb=> select * from RESOURCE_ACQUISITIONS LIMIT 2;
+      node_name       |  transaction_id   | statement_id | request_type | pool_name | thread_count | open_file_handle_count | memory_inuse_kb |     queue_entry_timestamp     |     acquisition_timestamp     |       release_timestamp       | duration_ms | is_executing
+----------------------+-------------------+--------------+--------------+-----------+--------------+------------------------+-----------------+-------------------------------+-------------------------------+-------------------------------+-------------+--------------
+ v_verticadb_node0007 | 81064793293278866 |            4 | Reserve      | general   |           73 |                    136 |         7169076 | 2014-02-03 18:30:22.80254-05  | 2014-02-03 18:30:22.802562-05 | 2014-02-03 18:30:23.116423-05 |         314 | f
+ v_verticadb_node0009 | 81064793293278866 |            4 | Reserve      | general   |           58 |                     24 |         3435607 | 2014-02-03 18:30:22.799151-05 | 2014-02-03 18:30:22.799172-05 | 2014-02-03 18:30:23.090139-05 |         291 | f
+(2 rows)
+
+//++++++++++++++++++++++++++++++++++++++++
