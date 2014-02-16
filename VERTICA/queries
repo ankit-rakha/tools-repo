@@ -57,3 +57,12 @@ verticadb=> SELECT projection_name, ros_count FROM projection_storage;
  CITY_b1                            |         4
 
 //++++++++++++++++++++++++++++++++++++++++
+
+verticadb=> SELECT node_name, schema_name, projection_name, deleted_row_count, used_bytes FROM delete_vectors;
+      node_name       | schema_name |          projection_name           | deleted_row_count | used_bytes
+----------------------+-------------+------------------------------------+-------------------+------------
+ v_verticadb_node0001 | XXXXXXXX    | xxxxxxxxxxxxxxxxxxxx               |             16337 |      17464
+ v_verticadb_node0001 | XXXXXXXX    | xxxxxxxxxxxxxxxxxxxx               |             28685 |      28901
+ v_verticadb_node0001 | XXXXXXXX    | xxxxxxxxxxxxxxxxxxxx               |               752 |        804
+
+//++++++++++++++++++++++++++++++++++++++++
