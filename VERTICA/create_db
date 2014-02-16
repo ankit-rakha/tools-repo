@@ -1,0 +1,36 @@
+$
+admintools
+-
+t create_db
+-
+s 10.20.100.66,10.20.100.67,10.20.100.68
+-
+d mydb
+-
+c /home/dbadmin/mydb/catalog
+-
+D /home/dbadmin/mydb/data
+-
+l /home/dbadmin/vlicense.dat
+Info: no password specified, using none
+Distributing changes to cluster.
+10.20.100.66 OK [vertica][(6, 1, 2)][20130430][x86_64]
+10.20.100.67 OK [vertica][(6, 1, 2)][20130430][x86_64]
+10.20.100.68
+OK [vertica][(6, 1, 2)][20130430][x86_64]
+Checking full connectivity
+Creating database mydb
+Node Status: v_mydb_node0001: (DOWN)
+Node Status: v_mydb_node0001: (INITIALIZING)
+Node Status: v_mydb_node0001: (VALIDATING LICENSE)
+Node Status: v_mydb_node0001:
+(UP)
+Creating database nodes
+Creating node v_mydb_node0002 (host 10.20.100.67)
+Creating node v_mydb_node0003 (host 10.20.100.68)
+Node Status: v_mydb_node0001: (UP) v_mydb_node0002: (UP)
+v_mydb_node0003: (DOWN)
+Node Status: v_mydb_node0001: (UP) v_mydb
+_node0002: (UP)
+v_mydb_node0003: (UP)
+Database mydb created successfully.
