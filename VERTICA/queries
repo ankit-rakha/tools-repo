@@ -49,3 +49,11 @@ COPY dce FROM ‘/tmp/dce.txt’ PARSER FDelimitedParser();
 (2 rows)
 
 //++++++++++++++++++++++++++++++++++++++++
+
+verticadb=> SELECT projection_name, ros_count FROM projection_storage;
+          projection_name           | ros_count
+------------------------------------+-----------
+ test_b1                            |         0
+ CITY_b1                            |         4
+
+//++++++++++++++++++++++++++++++++++++++++
