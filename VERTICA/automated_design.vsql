@@ -1,7 +1,7 @@
-SELECT EXPORT_CATALOG('/home/dbadmin/database_designer','DESIGN_ALL');
+SELECT EXPORT_CATALOG('/tmp/database_designer/database_designer','DESIGN_ALL');
 SELECT DESIGNER_CREATE_DESIGN('automated_design');
 SELECT DESIGNER_ADD_DESIGN_TABLES('automated_design', 'cfa.alpha_calls');
-SELECT DESIGNER_ADD_DESIGN_QUERIES('automated_design', '/home/dbadmin/database_designer/tune.sql', 'true');
+SELECT DESIGNER_ADD_DESIGN_QUERIES('automated_design', '/tmp/database_designer/tune.sql', 'true');
 SELECT DESIGNER_SET_DESIGN_TYPE('automated_design', 'INCREMENTAL');
 SELECT DESIGNER_SET_OPTIMIZATION_OBJECTIVE('automated_design', 'query');
-SELECT DESIGNER_RUN_POPULATE_DESIGN_AND_DEPLOY('automated_design','/home/dbadmin/database_designer/automated_design.sql','/home/dbadmin/database_designer/automated_deploy.sql','true','true','true','false');
+SELECT DESIGNER_RUN_POPULATE_DESIGN_AND_DEPLOY('automated_design','/tmp/database_designer/automated_design.sql','/tmp/database_designer/automated_deploy.sql','true','true','true','false');
