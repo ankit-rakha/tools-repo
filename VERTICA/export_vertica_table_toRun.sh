@@ -60,10 +60,17 @@ for ((counter1=1;counter1<="$numTables";counter1++));do
 
 	command1="SELECT column_name, data_type FROM columns WHERE table_schema='$verticaSchema' AND table_name='$verticaTable';"
 	
+	echo "DROP TABLE IF EXISTS $verticaSchema""_""$verticaTable"";" > external_table.hql
+	echo "CREATE EXTERNAL TABLE IF NOT EXISTS $verticaSchema""_""$verticaTable"" (" >> external_table.hql
+	
 	echo "DROP TABLE IF EXISTS hdfs.$verticaSchema""_""$verticaTable"";" > external_table.vsql
 	echo "CREATE EXTERNAL TABLE hdfs.$verticaSchema""_""$verticaTable"" (" >> external_table.vsql
+	
 	vsql_call1 "$command1" | sed -e "$ ! s/$/,/" >> external_table.vsql
+	vsql_call1 "$command1" | sed -e "$ ! s/$/,/" -e 's/int/bigint/g' -e 's/varchar.*/string/g' >> external_table.hql
+	
 	printf ") AS COPY SOURCE Hdfs(url='" >> external_table.vsql
+	echo ") PARTITIONED BY (yearMonth BIGINT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' NULL DEFINED AS '' STORED AS TEXTFILE;" >> external_table.hql
 
 	printf "\n==> GENERATING PARTITIONS FOR table: $verticaTable\n"
 	#create the partitions list
@@ -110,12 +117,17 @@ for ((counter1=1;counter1<="$numTables";counter1++));do
 		ssh -t -t -t "$user"@"$hostname" "rm -rf $remotePath$verticaSchema$verticaTable$partition$ext"
 
 		printf "$namenodeUrl$remoteHDFSPath$verticaSchema/$verticaTable/$partition/$verticaSchema""_""$verticaTable""_""$partition""$ext""," >> external_table.vsql
+		printf "ALTER TABLE $verticaSchema""_""$verticaTable"" ADD IF NOT EXISTS PARTITION (yearMonth = '""$partition""') LOCATION ""'$namenodeUrl$remoteHDFSPath$verticaSchema/$verticaTable/$partition/';" >> external_table.hql
 
 	done
 
 done
 
 printf "',username='hdfs')DELIMITER ',';"  >> external_table.vsql
-chmod +x external_table.vsql
-"$verticaBinDir"vsql -U "$username" -w "$password" -f external_table.vsql
+chmod +x external_table.*ql
+#"$verticaBinDir"vsql -U "$username" -w "$password" -f external_table.vsql
+
+#scp external_table.hql "$user"@"$hostname":$remotePath
+#ssh -t -t -t "$user"@"$hostname" "echo \"\" | sudo -S -u hdfs hive -f external_table.hql 
+#ssh -t -t -t "$user"@"$hostname" "rm -rf $remotePath""external_table.hql"
 
