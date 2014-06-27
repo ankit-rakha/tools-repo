@@ -18,11 +18,16 @@ user=arakha
 #this is the node name where we are dumping data
 hostname=rewrhdw1dv
 
+adminNode=rewrhda1dv
+
 #remote path on the hadoop node
 remotePath=/datastore/DATA/
 
 #remote HDFS path on hadoop node
 remoteHDFSPath=/user/hdfs/input-data/local-input/
+
+#remote path on admin node
+remoteAdminPath=/tmp/
 
 #dump extension
 ext=.csv
@@ -41,6 +46,7 @@ vsql_call ()
 }
 
 namenodeUrl=http://namenode:50070/webhdfs/v1
+hdfsUrl=hdfs://nameservice1"$remoteHDFSPath""$verticaSchema"
 
 #call vsql for dumping the data to remote host
 vsql_call1 ()
@@ -117,7 +123,7 @@ for ((counter1=1;counter1<="$numTables";counter1++));do
 		ssh -t -t -t "$user"@"$hostname" "rm -rf $remotePath$verticaSchema$verticaTable$partition$ext"
 
 		printf "$namenodeUrl$remoteHDFSPath$verticaSchema/$verticaTable/$partition/$verticaSchema""_""$verticaTable""_""$partition""$ext""," >> external_table.vsql
-		printf "ALTER TABLE $verticaSchema""_""$verticaTable"" ADD IF NOT EXISTS PARTITION (yearMonth = '""$partition""') LOCATION ""'$namenodeUrl$remoteHDFSPath$verticaSchema/$verticaTable/$partition/';" >> external_table.hql
+		printf "ALTER TABLE $verticaSchema""_""$verticaTable"" ADD IF NOT EXISTS PARTITION (yearMonth = '""$partition""') LOCATION ""'$hdfsUrl/$verticaTable/$partition/';" >> external_table.hql
 
 	done
 
@@ -125,9 +131,8 @@ done
 
 printf "',username='hdfs')DELIMITER ',';"  >> external_table.vsql
 chmod +x external_table.*ql
-#"$verticaBinDir"vsql -U "$username" -w "$password" -f external_table.vsql
+"$verticaBinDir"vsql -U "$username" -w "$password" -f external_table.vsql
 
-#scp external_table.hql "$user"@"$hostname":$remotePath
-#ssh -t -t -t "$user"@"$hostname" "echo \"\" | sudo -S -u hdfs hive -f external_table.hql 
-#ssh -t -t -t "$user"@"$hostname" "rm -rf $remotePath""external_table.hql"
-
+scp external_table.hql "$user"@"$adminNode":$remoteAdminPath
+ssh -t -t -t "$user"@"$adminNode" "echo \"\" | sudo -S -u hdfs hive -f ""$remoteAdminPath""external_table.hql" 
+ssh -t -t -t "$user"@"$adminNode" "rm -rf $remoteAdminPath""external_table.hql"
