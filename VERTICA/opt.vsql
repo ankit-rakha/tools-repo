@@ -1,0 +1,14 @@
+select * from system;
+select count(*) from delete_vectors;
+
+select refresh();
+select make_ahm_now();
+
+select purge();
+
+select make_ahm_now();
+
+select * from system;
+select count(*) from delete_vectors;
+
+SELECT ANALYZE_STATISTICS ('');
