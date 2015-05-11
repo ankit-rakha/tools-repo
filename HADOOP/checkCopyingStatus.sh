@@ -13,5 +13,6 @@ fi
 schemaName="$1"
 tableName="$2"
 
+#check the export status and size of the files
 "$hdfsApp" dfs -du -h /user/"$userName"/$schemaName/$tableName/*/*
 
